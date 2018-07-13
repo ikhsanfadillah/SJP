@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "ZipCode": "760101",
+    "WardNodeId": "3",
+    "TcNodeId": "2",
+    "assetAmount": "4"
+  },
+  {
+    "TcNodeId": "2",
+    "TcNodeAmount": "3100",
+    "TcLevel":[
+      {
+        "WardNodeId": "3",
+        "WardNodeAmount":"1000",
+        "WardLevel":[
+          {
+            "ZipCode": [
+              "760105","760105","760105"
+            ]
+          }
+        ]
+      },
+      {
+        "WardNodeId": "4",
+        "WardNodeAmount":"2100",
+        "WardLevel":[
+          {
+            "ZipCode": [
+              "760105","760105","760105"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "TcNodeId": "33",
+    "TcNodeAmount": "2000",
+    "TcLevel":[
+      {
+        "WardNodeId": "3",
+        "WardNodeAmount":"1000",
+        "WardLevel":[
+          {
+            "ZipCode": [
+              "760105","760105","760105"
+            ]
+          }
+        ]
+      },
+      {
+        "WardNodeId": "4",
+        "WardNodeAmount":"1000",
+        "WardLevel":[
+          {
+            "ZipCode": [
+              "760105","760105","760105"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+],

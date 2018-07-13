@@ -1,0 +1,9 @@
+1. fetch Asset Data
+2. fetch loc data gausah pake amount
+3. cari amount dari asset data.
+4. gabungkan Loc dengan assetAmount
+5. masukan Loc kedalam sessionStorage
+6. masukan Asset Data mentah kedalam localStorage
+7. filter Loc dengan Asset data berdasarkan zipCode.
+8. transform Loc menjadi tree.
+9. render loc dan render asset

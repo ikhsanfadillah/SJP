@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Cyber Max Asia</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="loading">
+    <div>
+        <div class="c1"></div>
+        <div class="c2"></div>
+        <div class="c3"></div>
+        <div class="c4"></div>
+    </div>
+    <h5>Loading...</h5>    
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div id="filter" class="col-lg-9 col-md-12">
+        <div class="d-md-inline-flex">
+            <h3 class="pr-4">FIND ASSET</h3>
+            <div class="d-md-flex align-items-center">
+                <div class="input-group search sx">
+                    <input id="inpFindAsset" type="search" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" id="findAsset" type="button">
+                        <i class="fa fa-search" style="color:white;"></i></button>
+                    </span>
+                    <span class="input-group-btn" style="border-left: 2px solid white">
+                        <button class="btn btn-info" id="findAllAsset" type="button">
+                        All</button>
+                    </span>
+                    <span class="input-group-btn" style="border-left: 2px solid white">
+                            <button class="btn btn-info px-4" type="button" onclick="toggleFildset()">Filter</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="row" id="filterList">
+      <div class="col-12 p-0">
+        <!--================== Filter Buttons================= -->
+          <ul id="filterListBtn" class="filters-list ">
+
+          </ul>
+         <!--================== Filter Buttons================= -->
+      </div>
+  </div>
+  <div id="fieldset">
+    <form class="row" id='filterAsset'>
+        <div class="col-lg-9 fieldset">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Location</h3>
+                        </div>
+                    </div>
+                    <div class="row sm-row">
+                        <div class="col-sm-4 sm-col">
+                            <div class="form-group">
+                                <input type="text" ng-model="colTcCode" class="form-control" name="tcCode" placeholder="tc code">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 sm-col">
+                            <div class="form-group">
+                                <input class="form-control" type="text" ng-model="pre" name="pre" placeholder="prefix">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-4 sm-col">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="block" placeholder="block">
+                            </div>
+                        </div>
+
+                         <div class="col-sm-4 sm-col">
+                            <div class="form-group">
+                                <input class="form-control" type="text" ng-model="zipCode" name="zipCode" placeholder="zip code">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Status &amp; Company</h3>
+                        </div>
+                    </div>
+                    <div class="row sm-row align-items-end">
+                        <div class="col-sm-4 sm-col">
+                            <div class="form-group">
+                                <label for=""><b>Asset Status</b></label>
+                                <select class="form-control" name="AssetStatus">
+                                    <option value="">Select</option>
+                                    <option value="Test-Enabled">Test Enabled</option>
+                                    <option value="Ready">Ready</option>
+                                    <option value="Enabled">Enabled</option>
+                                    <option value="Disabled">Disabled</option>
+                                    <option value="Decommissioned">Decommissioned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 sm-col">
+                            <div class="form-group">
+                                <label for=""><b>Company</b></label>
+
+                                <select class="form-control " id="idColMaintenanceCompanyId"  name="MaintenanceCompany">
+                                  <option value="" class="" selected="selected">No Data</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-4 sm-col hidden-md-down">
+                            <div class="form-group">
+                                <div class="row sm-row">
+                                    <div class="col-6 sm-col">
+                                        <button id="close-apply" class="btn-primary full-width" type="submit" onclick="ApplyFilter(event);">Apply</button>
+                                       
+                                        <!--<button id="close-apply" class="btn-primary full-width" type="button"  ng-click="closeLocationFilter();">Close & Apply 2</button>-->
+
+                                    </div>
+                                    <div class="col-6 sm-col">
+                                        <button class="btn-danger full-width" type="button" onclick="toggleFildset()">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 fieldset mt-0">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Errors</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="checkboxes-list">
+                        <li>
+                            <div class="f-group">
+                                <input class="checkbox" id="chb1" type="checkbox" data-select="notification" ng-model="colNoOfAlarms" name="Alarms" value="false">
+
+                                <label for="chb1" class="checkbox-label"><b>Alarms </b></label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="f-group">
+                                <input class="checkbox" id="chb2" type="checkbox" data-select="notification" ng-model="colNoOfFaults" name="Faults" value="false">
+                                <label for="chb2" class="checkbox-label"><b>Faults </b></label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="f-group">
+                                <input class="checkbox" id="chb3" type="checkbox" data-select="notification" ng-model="colNoOfPassengerTraped" name="PassengerTraped" value="false">
+                                <label for="chb3" class="checkbox-label"><b>Passenger Traps </b></label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="f-group">
+                                <input class="checkbox" id="chb4" type="checkbox" data-select="notification" ng-model="colNoOfPumpFault" name="Pumps" value="false">
+                                <label for="chb4" class="checkbox-label"><b>Pumps </b></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+
+  </div>
+
+  <div class="row">
+    <div id="location" class="col-lg-6 col-xl-6 sm-col">
+      <br>
+      <form name="locationPanelForm" id="filterTreeForm" class="ng-valid ng-dirty ng-valid-parse">
+        <div class="row sm-row">
+            <div class="col-sm-12 sm-col">
+                <div class="form-group">
+                  <h2>LOCATION</h2>
+                  <button type="button" onclick="reloadLS()">reload localStorage</button>
+                </div>
+            </div>
+            <br>
+
+            <div class="col-sm-4 sm-col">
+                <div class="form-group">
+                    <input type="text" class="form-control rounded-0" name="tcCode" placeholder="tc code">
+                </div>
+            </div>
+
+            <div class="col-sm-4 sm-col">
+                <div class="form-group">
+                    <input class="form-control rounded-0" type="text" name="pre" placeholder="prefix">
+                </div>
+            </div>
+
+            <div class="col-sm-4 sm-col">
+                <div class="form-group">
+                    <input class="form-control rounded-0" type="text" name="block" placeholder="block">
+                </div>
+            </div>
+
+            <div class="col-sm-4 sm-col">
+                <div class="form-group">
+                    <input class="form-control rounded-0" type="text" name="zipCode" placeholder="zip code">
+                </div>
+            </div>
+
+            <div class="col-sm-4 sm-col">
+                <div class="form-group">
+                    <button type="submit" id="close-apply" class="btn-primary full-width" type="button">Search</button>
+                </div>
+            </div>
+
+            <div class="col-sm-4 sm-col">
+                <div class="form-group">
+                    <button class="btn-danger full-width" type="reset" onclick="getTree();">Clear</button>
+                </div>
+            </div>
+        </div>
+      </form>
+      <hr>
+      <div class="tree-container">
+        <!-- ======================= Tree ============================= -->
+        <ul class="list-group menu">
+        </ul>
+        <!-- ========================================================== -->
+      </div>
+    </div>
+
+    <div id="assets" class="col-lg-4 col-xl-4 sm-col">
+      <br>
+      <h2 class="pl-3">Assets</h2>
+
+      <div id="assetsContainer" class="m-3 border">
+      <div id="collapseLMD" class="dropdown assets-dropdown">
+          <button class="form-control btn-dropdown rounded-0 m-0" style="cursor: pointer;">
+              LMD <span class="totalAsset"></span>
+          </button>
+          <div class="collapseItem">
+              <form action="" class="assets-dropdown-content pb-4 ng-pristine ng-valid">
+                  <div class="d-flex align-items-center py-1">
+                      <div class="input-group-prepend" style=" width:80%; margin: 15px auto 20px;">
+                        <div class="input-group">
+                          <input id="searchAssetLMD" type="text" class="form-control rounded-0" aria-label="Text input with radio button">
+                        </div>
+                        <div class="btn btn-primary rounded-0" ><i class="fa fa-search"></i></div>
+                      </div>
+                  </div>
+                  <table class="display">
+                  </table>
+                  
+              </form>
+          </div>
+      </div>
+      <div id="collapseLift" class="dropdown assets-dropdown">
+          <button class="form-control btn-dropdown rounded-0 m-0" style="cursor: pointer;">
+              LIFT <span class="totalAsset"></span>
+          </button>
+          <div class="collapseItem">
+              <form action="" class="assets-dropdown-content pb-4">
+                  <div class="d-flex align-items-center py-1">
+                      <div class="input-group-prepend" style=" width:80%; margin: 15px auto 20px;">
+                        <div class="input-group">
+                          <input id="searchAssetLift" type="text" class="form-control rounded-0" aria-label="Text input with radio button">
+                        </div>
+                        <div class="btn btn-primary rounded-0" ><i class="fa fa-search"></i></div>
+                      </div>
+                  </div>
+                  <table class="display">
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div id="collapseLMPD" class="dropdown assets-dropdown">
+          <button class="form-control btn-dropdown rounded-0 m-0" style="cursor: pointer;">
+              LMPD <span class="totalAsset"></span>
+          </button>
+          <div class="collapseItem">
+              <form action="" class="assets-dropdown-content pb-4 ng-pristine ng-valid">
+                  <div class="d-flex align-items-center py-1">
+                      <div class="input-group-prepend" style=" width:80%; margin: 15px auto 20px;">
+                        <div class="input-group">
+                          <input id="searchAssetLMPD" type="text" class="form-control rounded-0" aria-label="Text input with radio button">
+                        </div>
+                        <div class="btn btn-primary rounded-0" ><i class="fa fa-search"></i></div>
+                      </div>
+                  </div>
+                  <table class="display">
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div id="collapseHLMD" class="dropdown assets-dropdown">
+          <button class="form-control btn-dropdown rounded-0 m-0" style="cursor: pointer;">
+              HLMD <span class="totalAsset"></span>
+          </button>
+          <div class="collapseItem">
+              <form action="" class="assets-dropdown-content pb-4 ng-pristine ng-valid">
+                  <div class="d-flex align-items-center py-1">
+                      <div class="input-group-prepend" style=" width:80%; margin: 15px auto 20px;">
+                        <div class="input-group">
+                          <input id="searchAssetHLMD" type="text" class="form-control rounded-0" aria-label="Text input with radio button">
+                        </div>
+                        <div class="btn btn-primary rounded-0" ><i class="fa fa-search"></i></div>
+                      </div>
+                  </div>
+                  <table id="table_id" class="display">
+                  </table>
+              </form>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="app-event.js"></script>
+<script src="tree.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>
